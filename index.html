@@ -3,406 +3,428 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>حضور وانصراف - محطة معالجة صرف صحي طلخا</title>
+  <title>برنامج حضور وانصراف - محطة معالجة صرف صحي طلخا</title>
   <style>
-    :root {
-      --bg: #f1f5f9;
-      --card: #ffffff;
-      --primary: #0f766e;
-      --primary-dark: #115e59;
-      --accent: #0284c7;
-      --text: #0f172a;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --ok: #15803d;
-      --ok-bg: #dcfce7;
-      --err: #b91c1c;
-      --err-bg: #fee2e2;
-    }
     * { box-sizing: border-box; font-family: Tahoma, Arial, sans-serif; }
-    body { margin: 0; background: var(--bg); color: var(--text); }
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: #fff;
-      padding: 18px 16px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-    header h1 { margin: 0 0 6px; font-size: 20px; }
-    header p { margin: 0; font-size: 13px; opacity: 0.92; }
-    .container { max-width: 920px; margin: 18px auto; padding: 0 14px 40px; }
-    .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
-    .tab-btn {
-      flex: 1; padding: 12px; border: 1px solid var(--border);
-      background: var(--card); color: var(--text); border-radius: 10px;
-      font-weight: bold; font-size: 14px; cursor: pointer;
-    }
-    .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 18px; margin-bottom: 14px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-    }
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-    label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #334155; }
-    input, select {
-      width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1;
-      border-radius: 8px; font-size: 14px; background: #fff;
-    }
-    .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
-    button.action {
-      padding: 12px; border: none; border-radius: 9px;
-      font-size: 15px; font-weight: bold; cursor: pointer; color: #fff;
-    }
-    .btn-in { background: var(--ok); }
-    .btn-out { background: #d97706; }
-    .btn-primary { background: var(--primary); padding: 11px 16px; border: none; border-radius: 8px; color: #fff; font-weight: bold; cursor: pointer; }
-    .btn-refresh { background: #334155; padding: 9px 14px; border: none; border-radius: 8px; color: #fff; font-size: 13px; cursor: pointer; }
-    .status-box {
-      margin-top: 14px; padding: 12px; border-radius: 9px;
-      font-size: 14px; display: none; line-height: 1.6;
-    }
-    .status-ok { display: block; background: var(--ok-bg); color: var(--ok); border: 1px solid #86efac; }
-    .status-err { display: block; background: var(--err-bg); color: var(--err); border: 1px solid #fca5a5; }
-    .gps-pill {
-      display: inline-block; padding: 6px 10px; border-radius: 20px;
-      font-size: 12px; background: #e2e8f0; color: #1e293b; margin-top: 8px;
-    }
-    table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
-    th, td { border: 1px solid var(--border); padding: 8px; text-align: center; }
-    th { background: #f8fafc; font-weight: bold; }
-    .table-wrap { overflow-x: auto; }
+    body { margin: 0; background: #f1f5f9; color: #0f172a; }
+    header { background: #0f4c81; color: #fff; padding: 16px; text-align: center; }
+    header h1 { margin: 0; font-size: 18px; }
+    header p { margin: 4px 0 0; font-size: 13px; opacity: 0.9; }
+    .container { max-width: 780px; margin: 16px auto; padding: 0 12px 36px; }
+    .tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+    .tab-btn { flex: 1; min-width: 110px; padding: 10px; border: none; border-radius: 8px; background: #cbd5e1; color: #0f172a; font-weight: bold; cursor: pointer; font-size: 13px; }
+    .tab-btn.active { background: #0f4c81; color: #fff; }
+    .card { background: #fff; border-radius: 10px; padding: 16px; margin-bottom: 14px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    .card h2 { margin: 0 0 12px; font-size: 16px; color: #0f4c81; }
+    label { display: block; font-size: 13px; margin-bottom: 4px; font-weight: bold; }
+    input { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; }
+    .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    button.action { flex: 1; min-width: 120px; padding: 10px 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
+    .btn-primary { background: #0f4c81; color: #fff; }
+    .btn-success { background: #15803d; color: #fff; }
+    .btn-warn { background: #b45309; color: #fff; }
+    .btn-danger { background: #b91c1c; color: #fff; padding: 6px 10px; font-size: 12px; border-radius: 6px; border: none; cursor: pointer; }
+    .btn-edit { background: #0284c7; color: #fff; padding: 6px 10px; font-size: 12px; border-radius: 6px; border: none; cursor: pointer; margin-left: 4px; }
+    .status { margin-top: 10px; padding: 10px; border-radius: 8px; font-size: 13px; display: none; }
+    .status.ok { display: block; background: #dcfce7; color: #166534; }
+    .status.err { display: block; background: #fee2e2; color: #991b1b; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    th, td { border: 1px solid #e2e8f0; padding: 8px; text-align: center; }
+    th { background: #f8fafc; color: #0f4c81; }
     .hidden { display: none; }
   </style>
 </head>
 <body>
   <header>
     <h1>محطة معالجة صرف صحي طلخا</h1>
-    <p>منظومة تسجيل الحضور والانصراف الذكية (نطاق الموقع: 200 متر)</p>
+    <p>نظام تسجيل الحضور والانصراف وإدارة العاملين</p>
   </header>
 
   <div class="container">
     <div class="tabs">
-      <button class="tab-btn active" id="tabWorkerBtn" onclick="switchTab('worker')">بوابة العاملين</button>
-      <button class="tab-btn" id="tabAdminBtn" onclick="switchTab('admin')">لوحة الإدارة</button>
+      <button class="tab-btn active" onclick="switchTab('worker', this)">بوابة العاملين</button>
+      <button class="tab-btn" onclick="switchTab('admin', this)">إدارة العمال والسجل</button>
+      <button class="tab-btn" onclick="switchTab('settings', this)">الإعدادات</button>
     </div>
 
     <!-- بوابة العاملين -->
-    <section id="workerSection" class="card">
-      <h2 style="margin-top:0; font-size:17px;">تسجيل الحضور والانصراف</h2>
-      <div class="grid-2">
-        <div>
-          <label for="empCode">كود العامل</label>
-          <input type="text" id="empCode" placeholder="مثال: 101" inputmode="numeric" />
+    <div id="workerTab">
+      <div class="card">
+        <h2>تسجيل الحضور والانصراف</h2>
+        <button class="action btn-warn" style="width:100%; margin-bottom:10px;" onclick="checkGPS()">تحديث وفحص الموقع الجغرافي (GPS)</button>
+        <div id="gpsInfo" style="font-size:13px; margin-bottom:10px; color:#334155;">لم يتم فحص الموقع بعد.</div>
+
+        <label>كود العامل</label>
+        <input id="empCode" type="text" placeholder="مثال: 101" />
+
+        <label>الرقم السري (PIN)</label>
+        <input id="empPin" type="password" placeholder="أدخل الرقم السري" />
+
+        <div class="btn-row">
+          <button class="action btn-success" onclick="sendAttendance('حضور')">تسجيل حضور</button>
+          <button class="action btn-primary" onclick="sendAttendance('انصراف')">تسجيل انصراف</button>
         </div>
-        <div>
-          <label for="empPin">الرقم السري (PIN)</label>
-          <input type="password" id="empPin" placeholder="****" inputmode="numeric" />
-        </div>
+        <div id="workerMsg" class="status"></div>
       </div>
+    </div>
 
-      <div style="margin-top:10px;">
-        <button type="button" class="btn-refresh" onclick="checkLocation()">تحديث وفحص الموقع الجغرافي</button>
-        <div id="gpsInfo" class="gps-pill">لم يتم فحص الموقع بعد</div>
-      </div>
-
-      <div class="btn-row">
-        <button type="button" class="action btn-in" onclick="submitAttendance('حضور')">تسجيل حضور</button>
-        <button type="button" class="action btn-out" onclick="submitAttendance('انصراف')">تسجيل انصراف</button>
-      </div>
-
-      <div id="workerStatus" class="status-box"></div>
-    </section>
-
-    <!-- لوحة الإدارة -->
-    <section id="adminSection" class="hidden">
-      <div id="adminLoginCard" class="card">
-        <h2 style="margin-top:0; font-size:17px;">دخول الإدارة</h2>
-        <div class="grid-2">
-          <div>
-            <label for="adminPass">كلمة مرور الإدارة</label>
-            <input type="password" id="adminPass" placeholder="أدخل كلمة المرور (الافتراضية: admin123)" />
-          </div>
-          <div style="display:flex; align-items:flex-end;">
-            <button type="button" class="btn-primary" style="width:100%;" onclick="loginAdmin()">دخول</button>
-          </div>
-        </div>
-        <div id="adminLoginMsg" class="status-box"></div>
+    <!-- إدارة العمال والسجل -->
+    <div id="adminTab" class="hidden">
+      <div class="card" id="adminLoginCard">
+        <h2>دخول الإدارة</h2>
+        <label>كلمة مرور الإدارة</label>
+        <input id="adminPass" type="password" placeholder="أدخل كلمة المرور" />
+        <button class="action btn-primary" onclick="loginAdmin()">دخول</button>
+        <div id="adminLoginMsg" class="status"></div>
       </div>
 
       <div id="adminPanel" class="hidden">
         <div class="card">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-            <h2 style="margin:0; font-size:17px;">إضافة أو تعديل بيانات عامل</h2>
-            <button type="button" class="btn-refresh" onclick="loadSheetData()">تحديث البيانات من الجدول</button>
+          <h2 id="empFormTitle">إضافة عامل جديد</h2>
+          <label>كود العامل</label>
+          <input id="mCode" type="text" placeholder="مثال: 104" />
+
+          <label>اسم العامل</label>
+          <input id="mName" type="text" placeholder="الاسم الثلاثي" />
+
+          <label>الرقم السري (PIN)</label>
+          <input id="mPin" type="text" placeholder="مثال: 1234" />
+
+          <label>الوردية / الوظيفة</label>
+          <input id="mShift" type="text" placeholder="مثال: 1 أو مشغل وردية" />
+
+          <div class="btn-row">
+            <button class="action btn-success" onclick="saveEmployee()">حفظ العامل</button>
+            <button class="action btn-warn" onclick="resetEmpForm()">تفريغ الحقول</button>
           </div>
-          <div class="grid-2" style="margin-top:12px;">
-            <div>
-              <label for="wCode">كود العامل</label>
-              <input type="text" id="wCode" placeholder="مثال: 104" />
-            </div>
-            <div>
-              <label for="wName">اسم العامل</label>
-              <input type="text" id="wName" placeholder="الاسم الثلاثي" />
-            </div>
-            <div>
-              <label for="wPin">الرقم السري (PIN)</label>
-              <input type="text" id="wPin" placeholder="مثال: 1234" />
-            </div>
-            <div>
-              <label for="wShift">الوردية</label>
-              <select id="wShift">
-                <option value="1">الوردية 1</option>
-                <option value="2">الوردية 2</option>
-                <option value="3">الوردية 3</option>
-              </select>
-            </div>
-            <div>
-              <label for="wRole">الوظيفة</label>
-              <input type="text" id="wRole" placeholder="مثال: مشغل محطة" />
-            </div>
-          </div>
-          <div style="margin-top:12px;">
-            <button type="button" class="btn-primary" onclick="saveWorker()">حفظ بيانات العامل</button>
-          </div>
-          <div id="adminMsg" class="status-box"></div>
+          <div id="empMsg" class="status"></div>
         </div>
 
         <div class="card">
-          <h2 style="margin-top:0; font-size:17px;">سجل الحضور والانصراف</h2>
-          <div class="table-wrap">
+          <h2>قائمة العاملين</h2>
+          <button class="action btn-primary" onclick="loadEmployees()">تحديث قائمة العمال</button>
+          <div style="overflow-x:auto;">
             <table>
               <thead>
                 <tr>
-                  <th>التاريخ</th>
+                  <th>الكود</th>
+                  <th>الاسم</th>
+                  <th>الرقم السري</th>
+                  <th>الوردية / الوظيفة</th>
+                  <th>إجراء</th>
+                </tr>
+              </thead>
+              <tbody id="empTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>سجل الحضور والانصراف</h2>
+          <button class="action btn-primary" onclick="loadLogs()">تحديث السجل</button>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
                   <th>الوقت</th>
                   <th>الكود</th>
                   <th>الاسم</th>
-                  <th>الوردية</th>
                   <th>النوع</th>
                   <th>المسافة (م)</th>
-                  <th>الحالة</th>
                 </tr>
               </thead>
-              <tbody id="logsTableBody">
-                <tr><td colspan="8">جاري التحميل...</td></tr>
-              </tbody>
+              <tbody id="logsTableBody"></tbody>
             </table>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- الإعدادات -->
+    <div id="settingsTab" class="hidden">
+      <div class="card">
+        <h2>إعدادات الربط والموقع الجغرافي</h2>
+        <label>رابط Google Apps Script (Web App URL)</label>
+        <input id="cfgScriptUrl" type="text" />
+
+        <label>خط العرض (Latitude)</label>
+        <input id="cfgLat" type="text" />
+
+        <label>خط الطول (Longitude)</label>
+        <input id="cfgLng" type="text" />
+
+        <label>النطاق المسموح (بالمتر)</label>
+        <input id="cfgRadius" type="number" />
+
+        <label>كلمة مرور الإدارة</label>
+        <input id="cfgAdminPass" type="text" />
+
+        <div class="btn-row">
+          <button class="action btn-success" onclick="saveSettings()">حفظ الإعدادات</button>
+          <button class="action btn-warn" onclick="resetSettings()">استعادة الافتراضي</button>
+        </div>
+        <div id="cfgMsg" class="status"></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxvLDgAS2iu-GtxOzrCMqGgAvZ-uQVGURQMOgAHciyngSr_m9KmYzhQDwlSP8N_5VI/exec";
-    const PLANT_LAT = 31.067426;
-    const PLANT_LNG = 31.344855;
-    const MAX_RADIUS_METERS = 200;
-    const ADMIN_PASS = "admin123";
+    const DEFAULTS = {
+      scriptUrl: 'https://script.google.com/macros/s/AKfycbwxvLDgAS2iu-GtxOzrCMqGgAvZ-uQVGURQMOgAHciyngSr_m9KmYzhQDwlSP8N_5VI/exec',
+      lat: 31.067426,
+      lng: 31.344855,
+      radius: 200,
+      adminPass: 'admin123'
+    };
 
-    let cachedWorkers = [];
-    let cachedLogs = [];
-    let currentCoords = null;
-
-    function switchTab(tab) {
-      const isWorker = tab === "worker";
-      document.getElementById("workerSection").classList.toggle("hidden", !isWorker);
-      document.getElementById("adminSection").classList.toggle("hidden", isWorker);
-      document.getElementById("tabWorkerBtn").classList.toggle("active", isWorker);
-      document.getElementById("tabAdminBtn").classList.toggle("active", !isWorker);
-      if (!isWorker && !document.getElementById("adminPanel").classList.contains("hidden")) {
-        loadSheetData();
+    function getConfig() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('talkha_cfg') || '{}');
+        return { ...DEFAULTS, ...saved };
+      } catch (e) {
+        return { ...DEFAULTS };
       }
     }
 
-    function showStatus(elId, message, isOk) {
-      const el = document.getElementById(elId);
-      el.className = "status-box " + (isOk ? "status-ok" : "status-err");
-      el.innerHTML = message;
+    function fillSettingsForm() {
+      const cfg = getConfig();
+      document.getElementById('cfgScriptUrl').value = cfg.scriptUrl;
+      document.getElementById('cfgLat').value = cfg.lat;
+      document.getElementById('cfgLng').value = cfg.lng;
+      document.getElementById('cfgRadius').value = cfg.radius;
+      document.getElementById('cfgAdminPass').value = cfg.adminPass;
     }
 
-    function calcDistanceMeters(lat1, lon1, lat2, lon2) {
+    function saveSettings() {
+      const cfg = {
+        scriptUrl: document.getElementById('cfgScriptUrl').value.trim() || DEFAULTS.scriptUrl,
+        lat: parseFloat(document.getElementById('cfgLat').value) || DEFAULTS.lat,
+        lng: parseFloat(document.getElementById('cfgLng').value) || DEFAULTS.lng,
+        radius: parseInt(document.getElementById('cfgRadius').value, 10) || DEFAULTS.radius,
+        adminPass: document.getElementById('cfgAdminPass').value.trim() || DEFAULTS.adminPass
+      };
+      localStorage.setItem('talkha_cfg', JSON.stringify(cfg));
+      showMsg('cfgMsg', 'تم حفظ الإعدادات بنجاح.', true);
+    }
+
+    function resetSettings() {
+      localStorage.removeItem('talkha_cfg');
+      fillSettingsForm();
+      showMsg('cfgMsg', 'تمت استعادة الإعدادات الافتراضية.', true);
+    }
+
+    let currentCoords = null;
+    let isEditingEmp = false;
+
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('workerTab').classList.toggle('hidden', tab !== 'worker');
+      document.getElementById('adminTab').classList.toggle('hidden', tab !== 'admin');
+      document.getElementById('settingsTab').classList.toggle('hidden', tab !== 'settings');
+      if (tab === 'settings') fillSettingsForm();
+    }
+
+    function getDistanceMeters(lat1, lon1, lat2, lon2) {
       const R = 6371000;
-      const toRad = d => (d * Math.PI) / 180;
+      const toRad = x => x * Math.PI / 180;
       const dLat = toRad(lat2 - lat1);
       const dLon = toRad(lon2 - lon1);
-      const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-      return Math.round(R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+      return Math.round(2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
     }
 
-    function getPosition() {
-      return new Promise((resolve, reject) => {
-        if (!navigator.geolocation) {
-          reject(new Error("المتصفح لا يدعم تحديد الموقع الجغرافي."));
-          return;
-        }
-        navigator.geolocation.getCurrentPosition(
-          pos => resolve({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-          () => reject(new Error("تعذر الوصول للموقع. يرجى تفعيل GPS والسماح بالوصول للموقع.")),
-          { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
-        );
-      });
-    }
-
-    async function checkLocation() {
-      const pill = document.getElementById("gpsInfo");
-      pill.textContent = "جاري تحديد الموقع...";
-      try {
-        const coords = await getPosition();
-        const dist = calcDistanceMeters(coords.lat, coords.lng, PLANT_LAT, PLANT_LNG);
-        currentCoords = { ...coords, distance: dist };
-        const inside = dist <= MAX_RADIUS_METERS;
-        pill.textContent = `المسافة من المحطة: ${dist} متر (${inside ? "داخل النطاق المسموح" : "خارج النطاق المسموح"})`;
-      } catch (err) {
-        pill.textContent = err.message;
-      }
-    }
-
-    async function loadSheetData() {
-      const res = await fetch(SCRIPT_URL);
-      const data = await res.json();
-      cachedWorkers = data.workers || [];
-      cachedLogs = data.logs || [];
-      renderLogsTable();
-    }
-
-    async function submitAttendance(type) {
-      const code = document.getElementById("empCode").value.trim();
-      const pin = document.getElementById("empPin").value.trim();
-
-      if (!code || !pin) {
-        showStatus("workerStatus", "يرجى إدخال كود العامل والرقم السري.", false);
+    function checkGPS() {
+      const cfg = getConfig();
+      const info = document.getElementById('gpsInfo');
+      if (!navigator.geolocation) {
+        info.textContent = 'المتصفح لا يدعم تحديد الموقع.';
         return;
       }
+      info.textContent = 'جاري تحديد الموقع...';
+      navigator.geolocation.getCurrentPosition(pos => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const dist = getDistanceMeters(lat, lng, cfg.lat, cfg.lng);
+        currentCoords = { lat, lng, dist };
+        info.textContent = `المسافة عن المحطة: ${dist} متر (${dist <= cfg.radius ? 'داخل النطاق المسموح' : 'خارج نطاق ' + cfg.radius + ' متر'})`;
+      }, () => {
+        info.textContent = 'تعذر الوصول للموقع. تأكد من تشغيل GPS ومنح الإذن.';
+      }, { enableHighAccuracy: true, timeout: 10000 });
+    }
 
-      showStatus("workerStatus", "جاري التحقق من البيانات والموقع...", true);
+    function showMsg(id, text, ok) {
+      const el = document.getElementById(id);
+      el.textContent = text;
+      el.className = 'status ' + (ok ? 'ok' : 'err');
+    }
 
+    async function sendAttendance(type) {
+      const cfg = getConfig();
+      const code = document.getElementById('empCode').value.trim();
+      const pin = document.getElementById('empPin').value.trim();
+      if (!code || !pin) {
+        showMsg('workerMsg', 'أدخل كود العامل والرقم السري أولاً.', false);
+        return;
+      }
+      if (!currentCoords) {
+        showMsg('workerMsg', 'اضغط على تحديث وفحص الموقع الجغرافي أولاً.', false);
+        return;
+      }
+      if (currentCoords.dist > cfg.radius) {
+        showMsg('workerMsg', `أنت خارج نطاق المحطة (${currentCoords.dist} متر). الحد المسموح ${cfg.radius} متر.`, false);
+        return;
+      }
       try {
-        if (!cachedWorkers.length) {
-          await loadSheetData();
-        }
-
-        const worker = cachedWorkers.find(w => String(w.code).trim() === code && String(w.pin).trim() === pin);
-        if (!worker) {
-          showStatus("workerStatus", "كود العامل أو الرقم السري غير صحيح.", false);
-          return;
-        }
-
-        const coords = await getPosition();
-        const distance = calcDistanceMeters(coords.lat, coords.lng, PLANT_LAT, PLANT_LNG);
-        currentCoords = { ...coords, distance };
-
-        if (distance > MAX_RADIUS_METERS) {
-          showStatus(
-            "workerStatus",
-            `عذراً، أنت خارج نطاق محطة طلخا (المسافة الحالية: ${distance} متر، والحد المسموح: ${MAX_RADIUS_METERS} متر).`,
-            false
-          );
-          return;
-        }
-
-        const now = new Date();
-        const payload = {
-          action: "add_log",
-          data: {
-            id: "LOG-" + now.getTime(),
-            date: now.toLocaleDateString("en-CA"),
-            code: worker.code,
-            name: worker.name,
-            shift: worker.shift,
-            type: type,
-            time: now.toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit", second: "2-digit" }),
-            distance: distance,
-            status: "مقبول (داخل النطاق)",
-            lat: coords.lat,
-            lng: coords.lng
-          }
-        };
-
-        await fetch(SCRIPT_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+        const res = await fetch(cfg.scriptUrl, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'attendance',
+            code, pin, type,
+            lat: currentCoords.lat,
+            lng: currentCoords.lng,
+            distance: currentCoords.dist
+          })
         });
-
-        showStatus(
-          "workerStatus",
-          `تم تسجيل <strong>${type}</strong> بنجاح للعامل <strong>${worker.name}</strong> (المسافة: ${distance} متر).`,
-          true
-        );
-        document.getElementById("empPin").value = "";
-      } catch (err) {
-        showStatus("workerStatus", err.message || "حدث خطأ أثناء التسجيل.", false);
+        const data = await res.json();
+        showMsg('workerMsg', data.message || (data.ok ? 'تم التسجيل' : 'فشل التسجيل'), data.ok);
+      } catch (e) {
+        showMsg('workerMsg', 'حدث خطأ أثناء الاتصال بالخادم.', false);
       }
     }
 
     function loginAdmin() {
-      const pass = document.getElementById("adminPass").value;
-      if (pass === ADMIN_PASS) {
-        document.getElementById("adminLoginCard").classList.add("hidden");
-        document.getElementById("adminPanel").classList.remove("hidden");
-        loadSheetData();
+      const cfg = getConfig();
+      const pass = document.getElementById('adminPass').value;
+      if (pass === cfg.adminPass) {
+        document.getElementById('adminLoginCard').classList.add('hidden');
+        document.getElementById('adminPanel').classList.remove('hidden');
+        loadEmployees();
+        loadLogs();
       } else {
-        showStatus("adminLoginMsg", "كلمة مرور الإدارة غير صحيحة.", false);
+        showMsg('adminLoginMsg', 'كلمة مرور الإدارة غير صحيحة.', false);
       }
     }
 
-    async function saveWorker() {
-      const code = document.getElementById("wCode").value.trim();
-      const name = document.getElementById("wName").value.trim();
-      const pin = document.getElementById("wPin").value.trim();
-      const shift = document.getElementById("wShift").value;
-      const role = document.getElementById("wRole").value.trim();
+    function resetEmpForm() {
+      isEditingEmp = false;
+      document.getElementById('empFormTitle').textContent = 'إضافة عامل جديد';
+      document.getElementById('mCode').disabled = false;
+      document.getElementById('mCode').value = '';
+      document.getElementById('mName').value = '';
+      document.getElementById('mPin').value = '';
+      document.getElementById('mShift').value = '';
+    }
 
+    function startEditEmp(emp) {
+      isEditingEmp = true;
+      document.getElementById('empFormTitle').textContent = 'تعديل بيانات العامل (' + emp.code + ')';
+      document.getElementById('mCode').value = emp.code;
+      document.getElementById('mCode').disabled = true;
+      document.getElementById('mName').value = emp.name;
+      document.getElementById('mPin').value = emp.pin;
+      document.getElementById('mShift').value = emp.shift || '';
+    }
+
+    async function saveEmployee() {
+      const cfg = getConfig();
+      const code = document.getElementById('mCode').value.trim();
+      const name = document.getElementById('mName').value.trim();
+      const pin = document.getElementById('mPin').value.trim();
+      const shift = document.getElementById('mShift').value.trim();
       if (!code || !name || !pin) {
-        showStatus("adminMsg", "يرجى إدخال الكود والاسم والرقم السري للعامل.", false);
+        showMsg('empMsg', 'أدخل الكود والاسم والرقم السري.', false);
         return;
       }
-
-      const payload = {
-        action: "save_worker",
-        data: { code, name, pin, shift, role: role || "عامل محطة" }
-      };
-
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      showStatus("adminMsg", "تم إرسال بيانات العامل لحفظها في جدول Workers.", true);
-      setTimeout(loadSheetData, 1200);
+      try {
+        const res = await fetch(cfg.scriptUrl, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: isEditingEmp ? 'updateEmployee' : 'addEmployee',
+            code, name, pin, shift
+          })
+        });
+        const data = await res.json();
+        showMsg('empMsg', data.message || 'تم الحفظ', data.ok);
+        if (data.ok) {
+          resetEmpForm();
+          loadEmployees();
+        }
+      } catch (e) {
+        showMsg('empMsg', 'تعذر حفظ بيانات العامل.', false);
+      }
     }
 
-    function renderLogsTable() {
-      const tbody = document.getElementById("logsTableBody");
-      if (!cachedLogs.length) {
-        tbody.innerHTML = '<tr><td colspan="8">لا توجد سجلات حتى الآن</td></tr>';
-        return;
+    async function deleteEmployee(code) {
+      const cfg = getConfig();
+      if (!confirm('هل تريد حذف العامل صاحب الكود ' + code + '؟')) return;
+      try {
+        const res = await fetch(cfg.scriptUrl, {
+          method: 'POST',
+          body: JSON.stringify({ action: 'deleteEmployee', code })
+        });
+        const data = await res.json();
+        showMsg('empMsg', data.message || 'تم الحذف', data.ok);
+        if (data.ok) loadEmployees();
+      } catch (e) {
+        showMsg('empMsg', 'تعذر حذف العامل.', false);
       }
-      tbody.innerHTML = cachedLogs
-        .slice()
-        .reverse()
-        .map(l => `
+    }
+
+    async function loadEmployees() {
+      const cfg = getConfig();
+      const tbody = document.getElementById('empTableBody');
+      tbody.innerHTML = '<tr><td colspan="5">جاري التحميل...</td></tr>';
+      try {
+        const res = await fetch(cfg.scriptUrl + '?action=getEmployees');
+        const data = await res.json();
+        if (!data.ok || !data.employees || !data.employees.length) {
+          tbody.innerHTML = '<tr><td colspan="5">لا يوجد عمال مسجلون بعد.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.employees.map(emp => `
           <tr>
-            <td>${l.date}</td>
-            <td>${l.time}</td>
-            <td>${l.code}</td>
-            <td>${l.name}</td>
-            <td>${l.shift}</td>
-            <td>${l.type}</td>
-            <td>${l.distance}</td>
-            <td>${l.status}</td>
+            <td>${emp.code}</td>
+            <td>${emp.name}</td>
+            <td>${emp.pin}</td>
+            <td>${emp.shift || '-'}</td>
+            <td>
+              <button class="btn-edit" onclick='startEditEmp(${JSON.stringify(emp)})'>تعديل</button>
+              <button class="btn-danger" onclick="deleteEmployee('${emp.code}')">حذف</button>
+            </td>
           </tr>
-        `)
-        .join("");
+        `).join('');
+      } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="5">خطأ في تحميل قائمة العمال.</td></tr>';
+      }
     }
+
+    async function loadLogs() {
+      const cfg = getConfig();
+      const tbody = document.getElementById('logsTableBody');
+      tbody.innerHTML = '<tr><td colspan="5">جاري التحميل...</td></tr>';
+      try {
+        const res = await fetch(cfg.scriptUrl + '?action=getLogs');
+        const data = await res.json();
+        if (!data.ok || !data.logs || !data.logs.length) {
+          tbody.innerHTML = '<tr><td colspan="5">لا توجد سجلات حضور بعد.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.logs.slice(0, 50).map(row => `
+          <tr>
+            <td>${row.timestamp || row.time || ''}</td>
+            <td>${row.code}</td>
+            <td>${row.name}</td>
+            <td>${row.type}</td>
+            <td>${row.distance}</td>
+          </tr>
+        `).join('');
+      } catch (e) {
+        tbody.innerHTML = '<tr><td colspan="5">خطأ في تحميل السجل.</td></tr>';
+      }
+    }
+
+    fillSettingsForm();
   </script>
 </body>
-            </html>
+</html>
